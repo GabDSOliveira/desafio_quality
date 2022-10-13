@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.grupo2</groupId>
-    <artifactId>desafio_quality</artifactId>
+    <artifactId>desafioquality</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>desafio_quality</name>
+    <name>desafioquality</name>
     <description>desafio_quality</description>
     <properties>
         <java.version>11</java.version>

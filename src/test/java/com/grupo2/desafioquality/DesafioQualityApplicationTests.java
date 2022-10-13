@@ -1,4 +1,4 @@
-package com.grupo2.desafio_quality;
+package com.grupo2.desafioquality;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

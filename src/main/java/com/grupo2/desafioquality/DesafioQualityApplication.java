@@ -1,4 +1,4 @@
-package com.grupo2.desafio_quality;
+package com.grupo2.desafioquality;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
