@@ -7,6 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class Room {
     private String name;
-    private float length;
-    private float width;
+    private double length;
+    private double width;
 }
