@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "47b6d259-86c7-4ea4-a3ff-c7715eb418e8",
+		"name": "desafio_quality",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "property",
+			"item": [
+				{
+					"name": "Informações de Propriedade",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    name,\n    dristrictId,\n    rooms: [\n        {\n            name,\n            width,\n            length\n        }\n    ]\n}\n\n{\n    name,\n    value\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/property/c099ba25-e7dd-4574-8701-4b9ab6b9bfaf",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"property",
+								"c099ba25-e7dd-4574-8701-4b9ab6b9bfaf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Property",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Balcão\",\n    \"districtId\": \"84237687-4832-4e9a-ae3a-fb5330f64b6f\",\n    \"rooms\": [\n        {\n            \"name\": \"Banheiro\",\n            \"width\": 10,\n            \"length\": 10\n        },\n        {\n            \"name\": \"Quarto\",\n            \"width\": 20,\n            \"length\": 20\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/property",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"property"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "district",
+			"item": [
+				{
+					"name": "Criar District",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Parque Verde\",\n    \"value\": 10000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/district",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"district"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
