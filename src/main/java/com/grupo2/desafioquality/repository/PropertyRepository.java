@@ -13,7 +13,6 @@ public class PropertyRepository {
     private final List<Property> properties = new ArrayList<>();
 
     public PropertyRepository() {
-        // TODO: apagar isso
         District district = new District(UUID.randomUUID(), "Parque Verde", BigDecimal.valueOf(1000));
         Room restRoom = new Room("RestRoom", 30f, 30f);
         Room laundryRoom = new Room("LandryRoom", 10f, 10f);
