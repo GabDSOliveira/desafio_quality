@@ -1,9 +1,13 @@
 package com.grupo2.desafioquality.service;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.grupo2.desafioquality.dto.CreatePropertyDto;
 import com.grupo2.desafioquality.dto.CreateRoomDto;
+import com.grupo2.desafioquality.dto.PropertyDto;
+import com.grupo2.desafioquality.dto.RoomDto;
 import com.grupo2.desafioquality.model.District;
 import com.grupo2.desafioquality.model.Property;
+import com.grupo2.desafioquality.model.Room;
 import com.grupo2.desafioquality.repository.PropertyRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -59,10 +63,25 @@ class PropertyServiceTest {
 
     @Test
     void getPropertyArea_returnPropertyInfo_whenValidPropertyId() {
+        PropertyDto propertyDto = setupPropertyDto();
+        Property property = setupProperty();
+
+        Mockito.when(propertyRepository.findPropertyById(ArgumentMatchers.any())).thenReturn(Optional.of(property));
+        PropertyDto result = propertyService.getPropertyArea(propertyDto.getId());
+
+        assertThat(result).isNotNull();
+        assertThat(result.getId()).isEqualTo(propertyDto.getId());
+        assertThat(result.getDistrictName()).isEqualTo(propertyDto.getDistrictName());
+        assertThat(result.getArea()).isEqualTo(propertyDto.getArea());
+        assertThat(result.getLargestRoom()).isEqualTo(propertyDto.getLargestRoom());
+        assertThat(result.getRooms()).hasSameSizeAs(propertyDto.getRooms());
     }
 
     @Test
     void getPropertyArea_throwsError_whenPropertyNotFound() {
+        PropertyDto propertyDto = setupPropertyDto();
+
+        assertThrows(RuntimeException.class, () -> propertyService.getPropertyArea(propertyDto.getId()));
     }
 
     private CreatePropertyDto setupCreatePropertyDto() {
@@ -73,5 +92,28 @@ class PropertyServiceTest {
         rooms.add(room);
 
         return new CreatePropertyDto(name, districtId, rooms);
+    }
+
+    private PropertyDto setupPropertyDto() {
+        UUID id = UUID.randomUUID();
+        String name = "District";
+        double area = 200.0;
+        BigDecimal price = BigDecimal.valueOf(100000);
+        String largestRoom = "Quarto";
+        List<RoomDto> rooms = new ArrayList<>();
+        RoomDto room = new RoomDto("Quarto", 200.0);
+        rooms.add(room);
+
+        return new PropertyDto(id, name, area, price, largestRoom, rooms);
+    }
+    private Property setupProperty() {
+        UUID id = UUID.randomUUID();
+        String name = "District";
+            District district = new District(UUID.randomUUID(), "District", BigDecimal.valueOf(500));
+        List<Room> rooms = new ArrayList<>();
+        Room room = new Room("Quarto", 20, 10);
+        rooms.add(room);
+
+        return new Property(id, name, district, rooms);
     }
 }
