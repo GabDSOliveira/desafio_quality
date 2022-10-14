@@ -1,0 +1,7 @@
+package com.grupo2.desafioquality.exception;
+
+public class NotFoundException extends RuntimeException {
+    public NotFoundException(String message) {
+        super(message);
+    }
+}

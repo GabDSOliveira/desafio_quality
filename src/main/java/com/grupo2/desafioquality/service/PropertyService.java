@@ -3,6 +3,7 @@ package com.grupo2.desafioquality.service;
 import com.grupo2.desafioquality.dto.CreatePropertyDto;
 import com.grupo2.desafioquality.dto.PropertyDto;
 import com.grupo2.desafioquality.dto.RoomDto;
+import com.grupo2.desafioquality.exception.NotFoundException;
 import com.grupo2.desafioquality.model.District;
 import com.grupo2.desafioquality.model.Property;
 import com.grupo2.desafioquality.model.Room;
@@ -25,7 +26,7 @@ public class PropertyService {
 
     public Property createProperty(CreatePropertyDto createPropertyDto) {
         District district = districtService.findById(createPropertyDto.getDistrictId())
-                .orElseThrow(() -> new RuntimeException("District não encontrado"));
+                .orElseThrow(() -> new NotFoundException("District não encontrado"));
 
         List<Room> rooms = createPropertyDto.getRooms().stream()
                 .map(room -> new Room(room.getName(), room.getLength(), room.getWidth()))
@@ -38,7 +39,7 @@ public class PropertyService {
 
     public PropertyDto getPropertyArea(UUID propertyId) {
         Property property = propertyRepository.findPropertyById(propertyId)
-                .orElseThrow(() -> new RuntimeException("Property not found"));
+                .orElseThrow(() -> new NotFoundException("Property não encontrada"));
 
         District district = property.getDistrict();
 
