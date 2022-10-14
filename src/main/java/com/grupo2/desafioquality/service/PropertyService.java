@@ -1,5 +1,6 @@
 package com.grupo2.desafioquality.service;
 
+import com.grupo2.desafioquality.dto.CreatePropertyDto;
 import com.grupo2.desafioquality.dto.PropertyDto;
 import com.grupo2.desafioquality.dto.RoomDto;
 import com.grupo2.desafioquality.model.District;
@@ -20,6 +21,21 @@ import java.util.stream.Collectors;
 public class PropertyService {
     private final PropertyRepository propertyRepository;
 
+    private final DistrictService districtService;
+
+    public Property createProperty(CreatePropertyDto createPropertyDto) {
+        District district = districtService.findById(createPropertyDto.getDistrictId())
+                .orElseThrow(() -> new RuntimeException("District não encontrado"));
+
+        List<Room> rooms = createPropertyDto.getRooms().stream()
+                .map(room -> new Room(room.getName(), room.getLength(), room.getWidth()))
+                .collect(Collectors.toList());
+
+        Property property = new Property(UUID.randomUUID(), createPropertyDto.getName(), district, rooms);
+        propertyRepository.saveProperty(property);
+        return property;
+    }
+
     public PropertyDto getPropertyArea(UUID propertyId) {
         Property property = propertyRepository.findPropertyById(propertyId)
                 .orElseThrow(() -> new RuntimeException("Property not found"));
@@ -34,7 +50,7 @@ public class PropertyService {
         String largestRoom = calculateLargestRoom(rooms).getName();
 
         List<RoomDto> roomDtos = rooms.stream()
-                .map(room -> RoomDto.fromRoom(room, area))
+                .map(room -> RoomDto.fromRoom(room, calculateRoomArea(room)))
                 .collect(Collectors.toList());
 
         return new PropertyDto(

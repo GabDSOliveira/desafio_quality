@@ -18,7 +18,7 @@ public class PropertyController {
 
     @PostMapping
     public Property createProperty(@RequestBody @Valid CreatePropertyDto createPropertyDto) {
-        return null;
+        return propertyService.createProperty(createPropertyDto);
     }
 
     @GetMapping("/{id}")

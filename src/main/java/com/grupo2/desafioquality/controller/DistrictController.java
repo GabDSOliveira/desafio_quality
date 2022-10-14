@@ -1,6 +1,7 @@
 package com.grupo2.desafioquality.controller;
 
 import com.grupo2.desafioquality.dto.CreateDistrictDto;
+import com.grupo2.desafioquality.model.District;
 import com.grupo2.desafioquality.model.Property;
 import com.grupo2.desafioquality.service.DistrictService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class DistrictController {
     private final DistrictService districtService;
 
     @PostMapping
-    public Property createDistrict(@RequestBody @Valid CreateDistrictDto createDistrictDto) {
-        return null;
+    public District createDistrict(@RequestBody @Valid CreateDistrictDto createDistrictDto) {
+        return districtService.createDistrict(createDistrictDto);
     }
 }
