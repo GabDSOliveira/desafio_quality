@@ -44,6 +44,14 @@ public class GlobalExceptionHandler {
         return ErrorMessageResponseDto.withFieldErrors(exception.getFieldErrors());
     }
 
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorMessageResponseDto handleNotFoundException(NotFoundException exception) {
+        logger.error("NotFoundException: ", exception);
+        return ErrorMessageResponseDto.of(exception.getMessage(), "NOT_FOUND_ERROR");
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
