@@ -14,7 +14,6 @@ public class DistrictRepository {
     private final List<District> districts = new ArrayList<>();
 
     public DistrictRepository() {
-        // TODO: apagar ????
         District district = new District(
                 UUID.fromString("2db0d76c-9e95-4d91-a120-09993f4c2bfb"),
                 "Parque Verde",
