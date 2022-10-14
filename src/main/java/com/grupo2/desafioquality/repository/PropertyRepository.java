@@ -27,6 +27,10 @@ public class PropertyRepository {
         properties.add(property);
     }
 
+    public void saveProperty(Property property) {
+        this.properties.add(property);
+    }
+
     public Optional<Property> findPropertyById(UUID id) {
         return this.properties.stream()
                 .filter(property -> property.getId().equals(id)).findFirst();
