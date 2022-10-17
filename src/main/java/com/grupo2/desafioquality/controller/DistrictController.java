@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/** RestController que gerencia as rotas de bairro. */
 @RestController
 @RequestMapping("district")
 @RequiredArgsConstructor
 public class DistrictController {
     private final DistrictService districtService;
 
+    /** Rota HTTP para criar o bairro no repositório
+     * @param CreateDistrictDto createDistrictDto - DTO do bairro
+     * @return District - retorna o bairro criado
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public District createDistrict(@RequestBody @Valid CreateDistrictDto createDistrictDto) {
