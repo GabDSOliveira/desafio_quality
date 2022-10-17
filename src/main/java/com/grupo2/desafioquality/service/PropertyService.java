@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/** Classe de serviço da propriedade.
+ * @since Release 01 da aplicação.
+ */
 @Service
 @RequiredArgsConstructor
 public class PropertyService {
@@ -23,6 +26,10 @@ public class PropertyService {
 
     private final DistrictService districtService;
 
+    /** Cria uma propriedade no repositório
+     * @param CreatePropertyDto createPropertyDto - DTO de Property
+     * @return Property - retorna a propriedade criada
+     */
     public Property createProperty(CreatePropertyDto createPropertyDto) {
         District district = districtService.findById(createPropertyDto.getDistrictId())
                 .orElseThrow(() -> new RuntimeException("District não encontrado"));
@@ -36,6 +43,10 @@ public class PropertyService {
         return property;
     }
 
+    /** Retorna a área da propriedade com o id passado no parâmetro
+     * @param UUID propertyId - ID da propriedade
+     * @return PropertyDto - informações da propriedade
+     */
     public PropertyDto getPropertyArea(UUID propertyId) {
         Property property = propertyRepository.findPropertyById(propertyId)
                 .orElseThrow(() -> new RuntimeException("Property not found"));
